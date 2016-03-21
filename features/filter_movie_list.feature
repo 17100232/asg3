@@ -23,38 +23,37 @@ Background: movies have been added to database
 
 Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
-  When I check the following ratings: 'PG', 'R'
+  When I check the following ratings: PG, R
   # enter step(s) to uncheck all other checkboxes
-  When I uncheck the following ratings: 'G','PG-13','NC-17' 
+  When I uncheck the following ratings: G, PG-13, NC-17 
   # enter step to "submit" the search form on the homepage
-  And I press 'Refresh'
+  And I press "Refresh"
   # Then I should see the updated list
   # enter step(s) to ensure that PG and R movies are visible
-  Then I should see 'The Terminator'
-  And I should see 'When Harry Met Sally'
-  And I should see 'Amelie'
-  And I should see 'The Incredibles'
-  And I should see 'Raiders of the Lost Ark'
+  Then I should see "The Terminator"
+  And I should see "When Harry Met Sally"
+  And I should see "Amelie"
+  And I should see "The Incredibles"
+  And I should see "Raiders of the Lost Ark"
   # enter step(s) to ensure that other movies are not visible
-  And I should not see 'Aladdin'
-  And I should not see 'The Help'
-  And I should not see 'Chocolat'
-  And I should not see '2001: A Space Odyssey'
-  And I should not see 'Chicken Run'
+  And I should not see "Aladdin"
+  And I should not see "The Help"
+  And I should not see "Chocolat"
+  And I should not see "2001: A Space Odyssey"
+  And I should not see "Chicken Run"
 
 Scenario: all ratings selected
   # see assignment
-  When I check the checkboxes for all ratings
-  When I uncheck the checkboxes for none of the ratings
-  And I press 'Refresh'
-  Then I should see the updated list
-  And I should see 'The Terminator'
-  And I should see 'When Harry Met Sally'
-  And I should see 'Amelie'
-  And I should see 'The Incredibles'
-  And I should see 'Raiders of the Lost Ark'
-  And I should see 'Aladdin'
-  And I should see 'The Help'
-  And I should see 'Chocolat'
-  And I should see '2001: A Space Odyssey'
-  And I should see 'Chicken Run'
+  # When I check the checkboxes for all ratings
+  Then I should see all the movies
+  # And I press "Refresh"
+  # Then I should see "The Terminator"
+  # And I should see "When Harry Met Sally"
+  # And I should see 'Amelie'
+  # And I should see 'The Incredibles'
+  # And I should see 'Raiders of the Lost Ark'
+  # And I should see 'Aladdin'
+  # And I should see 'The Help'
+  # And I should see 'Chocolat'
+  # And I should see '2001: A Space Odyssey'
+  # And I should see 'Chicken Run'

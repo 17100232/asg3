@@ -14,10 +14,13 @@ end
 
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   # regex = /e1 e2/
-  # assert regex.match
+  # assert ((/.*#{e1}.*#{e2}.*/).match(page.body) == true)
+  assert (page.body.should have_content(/^.*#{e1}.*#{e2}.*$/))
+  # assert (page.body =~ (/^.*#{e1}.*#{e2}.*$/))
+  # assert (((/^.*#{e1}.*#{e2}.*$/) === page.body) == true)
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  flunk "Unimplemented"
+  # flunk "Unimplemented"
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -25,21 +28,30 @@ end
 #  "When I check the following ratings: G"
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
-  arr = rating_list.split(", ")
-    
-
-    if (uncheck)
-      
-    else
-      
+  # arr = rating_list.split(", ").each.do |field|
+    if (uncheck == "un")
+      # uncheck "ratings#{field}" #(field)
+      # step %{I uncheck "ratings_#{field}"}
+      rating_list.split(", ").each do |field| uncheck( "ratings_#{field}")
     end
+    else
+      # check "ratings#{field}"
+      # step %{I check "ratings_#{field}"}
+      rating_list.split(", ").each do |field| check ("ratings_#{field}")
+    end
+    end
+  # end
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
   # flunk "Unimplemented"
 end
 
+
+
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  flunk "Unimplemented"
+  mov = Movie.all
+  assert ((page.all("table#movies tr").count - 1 == mov.length) == true)
+  # flunk "Unimplemented"
 end
